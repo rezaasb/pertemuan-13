@@ -1,13 +1,12 @@
 <?php
-// include database connection file
-include_once("config.php");
- 
-// Get id from URL to delete that user
-$id = $_GET['id'];
- 
-// Delete user row from table based on given id
-$result = mysqli_query($mysqli, "DELETE FROM users WHERE id=$id");
- 
-// After delete redirect to Home, so that latest user list will be displayed.
-header("Location:index.php");
-?>
+include "koneksi.php";
+$articleID = $_GET['articleID'];
+$perintah = "DELETE FROM articles WHERE articleID =\"$articleID\"";
+$hasil = mysqli_query($koneksi, $perintah);
+if ($hasil) {
+    echo "Artikel berhasil dihapus<br>";
+    echo "<a href=\"tampil_articles.php\">Back</a>";
+} else {
+    echo "Komentar gagal dihapus. Kemungkinan terjadi kegagalan koneksi
+ ke database MySQL.";
+}
